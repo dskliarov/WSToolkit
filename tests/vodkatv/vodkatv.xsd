@@ -19,14 +19,6 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="findRoomByIdParams">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="roomId" type="xsd:string" />
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
     <xsd:element name="deleteRoomParams">
         <xsd:complexType>
             <xsd:sequence>
@@ -859,6 +851,7 @@
     </xsd:element>
 
     <!-- VideoServer -->
+
     <xsd:element name="videoServer">
         <xsd:annotation>
             <xsd:documentation>
@@ -927,56 +920,6 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- VideoServerAction -->
-    <xsd:element name="createVideoServerActionParams">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="videoServerId" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="appName" type="xsd:string" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="action" type="xsd:string" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="streamName" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="videoServerAction">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="videoServerId" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="appName" type="xsd:string" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="action" type="xsd:string" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="streamName" type="xsd:string" minOccurs="0" maxOccurs="1" />
-                <xsd:element name="errors" type="tns:errors" minOccurs="0" maxOccurs="1" />
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="findVideoServerActionsByVideoServerNameParams">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="videoServerName" type="xsd:string" />
-                <xsd:element name="appName" type="xsd:string" />
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="videoServerActions">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="videoServerAction" type="tns:videoServerActionType" minOccurs="0" maxOccurs="unbounded" />
-                <xsd:element name="errors" type="tns:errors" minOccurs="0" maxOccurs="1" />
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:complexType name="videoServerActionType">
-        <xsd:sequence>
-            <xsd:element name="action" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="streamName" type="xsd:string" minOccurs="0" maxOccurs="1" />
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <!-- VideoServerStatus -->
     <xsd:element name="videoServerStatus">
         <xsd:annotation>
             <xsd:documentation>
@@ -992,6 +935,14 @@
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="updateOrCreateVideoServerStatusParams" type="tns:videoServerStatusType">
+        <xsd:annotation>
+            <xsd:documentation>
+            Params for create or update operation.
+            </xsd:documentation>
+        </xsd:annotation>
     </xsd:element>
 
     <xsd:element name="findVideoServerStatusById">
@@ -1037,39 +988,8 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:complexType name="videoServerStreamsType">
-        <xsd:sequence>
-            <xsd:element name="stream" type="tns:videoServerStreamType" minOccurs="0" maxOccurs="unbounded" />
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="videoServerStreamType">
-        <xsd:sequence>
-            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
-            <xsd:element name="bitRate" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="status" type="xsd:string" minOccurs="1" maxOccurs="1" />
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="videoServerStatusType">
-        <xsd:sequence>
-            <xsd:element name="id" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="videoServerId" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="appName" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="connectedClients" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="lastUpdate" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="streams" type="tns:videoServerStreamsType" minOccurs="0" maxOccurs="1" />
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="videoServersStatusType">
-        <xsd:sequence>
-            <xsd:element name="videoServerStatus" type="tns:videoServerStatusType" minOccurs="0" maxOccurs="unbounded" />
-        </xsd:sequence>
-    </xsd:complexType>
-
     <!-- VideoServerGroup -->
+
     <xsd:element name="videoServerGroup">
         <xsd:annotation>
             <xsd:documentation>
@@ -1905,7 +1825,6 @@
             <!-- dateFirstUse: yyyy-MM-dd'T'HH:mm:ssZ -->
             <xsd:element name="dateFirstUse" type="xsd:string" minOccurs="0" maxOccurs="1" />
             <xsd:element name="disabled" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="inactive" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -2086,7 +2005,7 @@
             <xsd:element name="internalPort" type="xsd:integer" minOccurs="0" maxOccurs="1" />
             <xsd:element name="maxRequests" type="xsd:integer" minOccurs="0" maxOccurs="1" />
             <xsd:element name="maxInactivitySeconds" type="xsd:integer" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="videoServerType" type="xsd:string" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="videoServerTypeType" type="xsd:string" minOccurs="0" maxOccurs="1" />
             <xsd:element name="videoServerContent" type="xsd:string" minOccurs="0" maxOccurs="1" />
             <xsd:element name="networkArea" type="tns:networkAreaType" minOccurs="0" maxOccurs="1" />
             <xsd:element name="active" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
@@ -2113,6 +2032,38 @@
             <xsd:element name="id" type="xsd:integer" minOccurs="0" maxOccurs="1" />
             <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" />
         </xsd:all>
+    </xsd:complexType>
+
+    <xsd:complexType name="videoServerStreamsType">
+        <xsd:sequence>
+            <xsd:element name="stream" type="tns:videoServerStreamType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="videoServerStreamType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="bitRate" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="running" type="xsd:boolean" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="videoServerStatusType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="videoServerId" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="appName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="connectedClients" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="lastUpdate" type="xsd:string" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="streams" type="tns:videoServerStreamsType" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="videoServersStatusType">
+        <xsd:sequence>
+            <xsd:element name="videoServerStatus" type="tns:videoServerStatusType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="screenSaversType">
@@ -2284,7 +2235,7 @@
         <xsd:sequence>
             <xsd:element name="vodkatvChannelId" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="bahamasChannelId" type="xsd:string" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="channelType" type="tns:channelTypeType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="channelTypeType" type="tns:channelTypeType" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="accessType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" />
             <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1" />
